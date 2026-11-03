@@ -1,0 +1,109 @@
+feeds:
+  - name: White House
+    url: https://www.whitehouse.gov/briefing-room/statements-releases/feed/
+    type: official
+
+  - name: U.S. Department of State
+    url: https://www.state.gov/rss-feed/press-releases/
+    type: official
+
+  - name: Office of the U.S. Trade Representative
+    url: https://ustr.gov/rss.xml
+    type: official
+
+  - name: BBC China
+    url: https://feeds.bbci.co.uk/news/world/asia/china/rss.xml
+    type: media
+
+gdelt:
+  enabled: true
+  lookback: 24h
+  max_records: 50
+  trusted_domains:
+    - reuters.com
+    - apnews.com
+    - bbc.com
+    - bbc.co.uk
+    - npr.org
+    - ft.com
+    - scmp.com
+
+# 规则初筛词。命中主题词并命中双边关联词，才会进入候选列表。
+topic_keywords:
+  元首外交:
+    - summit
+    - leaders meet
+    - leader call
+    - presidential meeting
+    - state visit
+    - 元首会晤
+    - 领导人会晤
+    - 国事访问
+
+  经贸关系:
+    - tariff
+    - trade talks
+    - trade deal
+    - trade dispute
+    - 关税
+    - 经贸磋商
+    - 贸易谈判
+    - 贸易协议
+
+  制裁与出口管制:
+    - sanctions
+    - export controls
+    - entity list
+    - semiconductor
+    - chip export
+    - 制裁
+    - 出口管制
+    - 实体清单
+    - 半导体
+    - 芯片
+
+  台湾与安全:
+    - taiwan
+    - taiwan strait
+    - south china sea
+    - military dialogue
+    - 台湾
+    - 台海
+    - 南海
+    - 军事沟通
+
+  科技与AI:
+    - artificial intelligence
+    - AI safety
+    - technology restrictions
+    - 人工智能
+    - AI安全
+    - 科技限制
+
+  外交对话:
+    - diplomatic talks
+    - foreign ministers
+    - dialogue
+    - bilateral meeting
+    - 外交对话
+    - 外长
+    - 双边会谈
+
+bilateral_keywords:
+  - united states
+  - u.s.
+  - us-china
+  - u.s.-china
+  - american
+  - china
+  - chinese
+  - beijing
+  - washington
+  - taiwan
+  - 中美
+  - 美国
+  - 中国
+  - 北京
+  - 华盛顿
+  - 台湾
+  - 台海
