@@ -100,23 +100,26 @@ def keyword_found(text, keyword):
 
     return keyword in text
 
-def classify(title, excerpt):
-    text = f"{title} {excerpt}".lower()
-    topics = CONFIG.get("topic_keywords", {})
-    matched = [
-        category
-        for category, words in topics.items()
-        if any(keyword_found(text, word) for word in words)
+def classify(text):
+    us_words = [
+        "united states", "u.s.", "american", "washington",
+        "美国", "中美"
     ]
-    related = any(
-        keyword_found(text, word)
-        for word in CONFIG.get("bilateral_keywords", [])
-    )
+    china_words = [
+        "china", "chinese", "beijing", "中国", "中美"
+    ]
 
-    if not matched or not related:
+    # 初版采取较严格筛选：标题或文本须同时涉及美国和中国
+    if not any(has_keyword(text, word) for word in us_words):
+        return None
+    if not any(has_keyword(text, word) for word in china_words):
         return None
 
-    return matched[0]
+    for category, words in CONFIG.get("topic_keywords", {}).items():
+        if any(has_keyword(text, word) for word in words):
+            return category
+
+    return None
 
 def make_id(url):
     return hashlib.sha1(canonical_url(url).encode("utf-8")).hexdigest()[:14]
