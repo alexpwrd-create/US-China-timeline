@@ -102,21 +102,19 @@ def keyword_found(text, keyword):
 
 def classify(text):
     us_words = [
-        "united states", "u.s.", "american", "washington",
-        "美国", "中美"
+        "united states", "u.s.", "american", "washington", "美国", "中美"
     ]
     china_words = [
         "china", "chinese", "beijing", "中国", "中美"
     ]
 
-    # 初版采取较严格筛选：标题或文本须同时涉及美国和中国
-    if not any(has_keyword(text, word) for word in us_words):
+    if not any(keyword_found(text, word) for word in us_words):
         return None
-    if not any(has_keyword(text, word) for word in china_words):
+    if not any(keyword_found(text, word) for word in china_words):
         return None
 
     for category, words in CONFIG.get("topic_keywords", {}).items():
-        if any(has_keyword(text, word) for word in words):
+        if any(keyword_found(text, word) for word in words):
             return category
 
     return None
@@ -160,7 +158,7 @@ def feed_candidates():
                     re.sub(r"<[^>]+>", " ", entry.get("summary", "") or ""),
                 ).strip()
 
-                category = classify(title, excerpt)
+                category = classify(title)
                 if not category:
                     continue
 
@@ -239,7 +237,7 @@ def gdelt_candidates():
             continue
 
         excerpt = (article.get("seendate") or "").strip()
-        category = classify(title, excerpt)
+        category = classify(title)
         if not category:
             continue
 
