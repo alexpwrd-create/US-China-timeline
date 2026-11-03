@@ -25,7 +25,7 @@ jobs:
         run: python collector.py
 
       - name: Save candidates
-        run: |
+      run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/pending.json
@@ -33,5 +33,6 @@ jobs:
             echo "No new candidates."
           else
             git commit -m "chore: collect news candidates"
+            git pull --rebase origin main
             git push
           fi
