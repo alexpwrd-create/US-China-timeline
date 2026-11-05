@@ -157,15 +157,40 @@ def history_page(events):
         line-height: 1.3 !important;
         margin-bottom: 0.25rem !important;
     }
-
-    div[class*="st-key-history-timeline-"] {
-        position: relative;
-        border-left: 2px solid #cbd5e1;
-        margin: 0 0 0 0.4rem;
-        padding: 0.15rem 0 1rem 1.25rem;
+    div[class~="st-key-timeline-wrapper"] {
+    position: relative;
     }
-
-    div[class*="st-key-history-timeline-"]::before {
+    
+    div[class~="st-key-timeline-wrapper"]::before {
+        content: "";
+        position: absolute;
+        left: 0.7rem;
+        top: 0.4rem;
+        bottom: 0.5rem;
+        width: 2px;
+        background: #cbd5e1;
+    }
+    
+    div[class*="st-key-timeline-item-"] {
+        position: relative;
+        margin: 0 !important;
+        padding: 0.15rem 0 1.5rem 2rem;
+    }
+    
+    div[class*="st-key-timeline-item-"]::before {
+        content: "";
+        position: absolute;
+        left: calc(0.7rem - 6px);
+        top: 0.35rem;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background: #2563eb;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #2563eb;
+    }
+   
         content: "";
         position: absolute;
         left: -8px;
