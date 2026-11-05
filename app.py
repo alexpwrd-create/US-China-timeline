@@ -138,21 +138,44 @@ def history_page(events):
         color: #667085;
         margin: 0 0 0.12rem 0;
     }
+
     .history-title-zh {
         font-size: 1.12rem;
         line-height: 1.2;
         font-weight: 700;
         margin: 0 0 0.05rem 0;
     }
+
     .history-title-en {
         font-size: 0.94rem;
         line-height: 1.2;
         color: #475467;
         margin: 0 0 0.25rem 0;
     }
+
     div[data-testid="stMarkdownContainer"] p {
         line-height: 1.3 !important;
         margin-bottom: 0.25rem !important;
+    }
+
+    div[class*="st-key-history-timeline-"] {
+        position: relative;
+        border-left: 2px solid #cbd5e1;
+        margin: 0 0 0 0.4rem;
+        padding: 0.15rem 0 1rem 1.25rem;
+    }
+
+    div[class*="st-key-history-timeline-"]::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 0.35rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #2563eb;
+        border: 2px solid white;
+        box-shadow: 0 0 0 1px #2563eb;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -227,7 +250,7 @@ def history_page(events):
         date_label = html.escape(date_label)
         categories = " · ".join(get_categories(event)) or "未分类 / Unclassified"
 
-        with st.container(border=True):
+        with st.container(border=False, key=f"history-timeline-{index}"):
             st.markdown(
                 f"""
                 <div class="history-date">{date_label}</div>
