@@ -312,7 +312,7 @@ def render_agenda_card(item, status_label, index):
         st.caption(f"最后核实 / Last verified: {verified}")
         render_sources(item)
 
-events_data = read_json("events.json")
+events_data = read_json("history.json")
 agenda_data = read_json("agenda.json")
 
 with st.sidebar:
