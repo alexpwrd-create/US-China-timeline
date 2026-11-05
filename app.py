@@ -157,11 +157,12 @@ def history_page(events):
         line-height: 1.3 !important;
         margin-bottom: 0.25rem !important;
     }
-    div[class~="st-key-timeline-wrapper"] {
-    position: relative;
+    .st-key-timeline-wrapper {
+        position: relative;
     }
     
-    div[class~="st-key-timeline-wrapper"]::before {
+    /* 整个列表共用一条连续竖线 */
+    .st-key-timeline-wrapper::before {
         content: "";
         position: absolute;
         left: 0.7rem;
@@ -171,12 +172,14 @@ def history_page(events):
         background: #cbd5e1;
     }
     
+    /* 每条事件不单独画线 */
     div[class*="st-key-timeline-item-"] {
         position: relative;
         margin: 0 !important;
         padding: 0.15rem 0 1.5rem 2rem;
     }
     
+    /* 日期旁的圆点 */
     div[class*="st-key-timeline-item-"]::before {
         content: "";
         position: absolute;
@@ -262,38 +265,47 @@ def history_page(events):
         )
         return
 
-    for index, event in enumerate(filtered):
-        event_date = str(event.get("date", "日期待补"))
-        date_end = str(event.get("date_end", ""))
+    with st.container(key="timeline-wrapper"):
+        for index, event in enumerate(filtered):
+            event_date = str(event.get("date", "日期待补"))
+            date_end = str(event.get("date_end", ""))
 
-        date_label = event_date
-        if date_end and date_end != event_date:
-            date_label += f" — {date_end}"
+            date_label = event_date
+            if date_end and date_end != event_date:
+                date_label += f" — {date_end}"
 
-        title_zh = html.escape(str(event.get("title_zh", "中文标题待补")))
-        title_en = html.escape(str(event.get("title_en", "English title pending")))
-        date_label = html.escape(date_label)
-        categories = " · ".join(get_categories(event)) or "未分类 / Unclassified"
-
-        with st.container(border=False, key=f"history-timeline-{index}"):
-            st.markdown(
-                f"""
-                <div class="history-date">{date_label}</div>
-                <div class="history-title-zh">{title_zh}</div>
-                <div class="history-title-en">{title_en}</div>
-                """,
-                unsafe_allow_html=True,
+            title_zh = html.escape(
+                str(event.get("title_zh", "中文标题待补"))
             )
-            st.caption(f"领域 / Fields: {categories}")
+            title_en = html.escape(
+                str(event.get("title_en", "English title pending"))
+            )
+            date_label = html.escape(date_label)
+            categories = " · ".join(get_categories(event)) or "未分类 / Unclassified"
 
-            render_bilingual_field(event, "summary", "摘要", "Summary")
-            render_bilingual_field(event, "participants", "参与官员与会面", "Officials and meetings")
-            render_bilingual_field(event, "topics", "讨论议题", "Topics discussed")
-            render_bilingual_field(event, "measures", "具体措施", "Specific measures")
-            render_bilingual_field(event, "background", "背景", "Background")
-            render_bilingual_field(event, "follow_up", "后续与影响", "Follow-up and impact")
+            with st.container(border=False, key=f"timeline-item-{index}"):
+                st.markdown(
+                    f"""
+                    <div class="history-date">{date_label}</div>
+                    <div class="history-title-zh">{title_zh}</div>
+                    <div class="history-title-en">{title_en}</div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.caption(f"领域 / Fields：{categories}")
 
-            render_sources(event)
+                render_bilingual_field(event, "summary", "摘要", "Summary")
+                render_bilingual_field(
+                    event, "participants", "参与官员与会面", "Officials and meetings"
+                )
+                render_bilingual_field(event, "topics", "讨论议题", "Topics discussed")
+                render_bilingual_field(event, "measures", "具体措施", "Specific measures")
+                render_bilingual_field(event, "background", "背景", "Background")
+                render_bilingual_field(
+                    event, "follow_up", "后续与影响", "Follow-up and impact"
+                )
+
+                render_sources(event)
 
 def agenda_page(agenda):
     st.title("未来 12 个月重大议程")
