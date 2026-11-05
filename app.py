@@ -89,6 +89,10 @@ def get_sources(item):
 
 def render_sources(item):
     sources = get_sources(item)
+    event_id = str(
+    item.get("id")
+    or f"{item.get('date', 'unknown')}_{item.get('title_zh', 'event')}"
+)
 
     if not 1 <= len(sources) <= 3:
         st.warning("来源应为 1–3 条；请审核后补充或调整。")
@@ -103,7 +107,7 @@ def render_sources(item):
                 st.link_button(
                     f"{index}. {name_zh} / {name_en}",
                     url,
-                    key=f"source_{item.get('id', 'item')}_{index}",
+                    key=f"source_{event_id}_{index}",
                 )
             else:
                 st.write(f"{index}. {name_zh} / {name_en}（链接待补）")
