@@ -4,11 +4,16 @@
     "date": "2017-05-11",
     "title_zh": "中美公布“百日计划”初步成果",
     "title_en": "U.S. and China Announce Initial Results of the 100-Day Action Plan",
-    "description_zh": "中美公布特朗普与习近平海湖庄园会晤后启动的“百日计划”初步成果。美国商务部长罗斯、财政部长姆努钦与中国副总理汪洋参与相关磋商。成果涉及美国牛肉对华出口、中国熟制禽肉对美出口议题、生物技术产品审查、液化天然气和金融服务等；其中牛肉进口承诺设有后续实施期限。",
-    "description_en": "The United States and China announced initial results of the “100-Day Action Plan” launched after the Trump–Xi summit at Mar-a-Lago. The consultations involved U.S. Commerce Secretary Wilbur Ross, Treasury Secretary Steven Mnuchin, and Chinese Vice Premier Wang Yang. Topics included U.S. beef exports to China, Chinese cooked-poultry exports to the United States, biotechnology reviews, liquefied natural gas, and financial services.",
-    "categories": ["经贸与关税", "外交对话"],
-    "source_title": "美国商务部联合发布",
-    "source_url": "https://www.commerce.gov/news/press-releases/2017/05/joint-release-initial-results-100-day-action-plan-us-china-comprehensive?__cf_chl_rt_tk=c9oNeyp5mvgDPbfcH..h8F1gFo_5hu9Km.Qzktqd9vc-1793862627-1.0.1.1-.MCXe5PEVo22cjx.LZlFT3mpz9Vv_YDdNjItSHqbuBI",
+    "category": ["经贸与关税", "外交对话"],
+    "summary_zh": "中美公布特朗普与习近平海湖庄园会晤后启动的“百日计划”初步成果。美国商务部长罗斯、财政部长姆努钦与中国副总理汪洋参与相关磋商。成果涉及美国牛肉对华出口、中国熟制禽肉对美出口议题、生物技术产品审查、液化天然气和金融服务等；其中牛肉进口承诺设有后续实施期限。",
+    "summary_en": "The United States and China announced initial results of the “100-Day Action Plan” launched after the Trump–Xi summit at Mar-a-Lago. The consultations involved U.S. Commerce Secretary Wilbur Ross, Treasury Secretary Steven Mnuchin, and Chinese Vice Premier Wang Yang. Topics included U.S. beef exports to China, Chinese cooked-poultry exports to the United States, biotechnology reviews, liquefied natural gas, and financial services.",
+    "sources": [
+      {
+        "name_zh": "美国商务部联合发布",
+        "name_en": "U.S. Department of Commerce joint release",
+        "url": "https://www.commerce.gov/news/press-releases/2017/05/joint-release-initial-results-100-day-action-plan-us-china-comprehensive"
+      }
+    ],
     "approved": true
   }
 ]
