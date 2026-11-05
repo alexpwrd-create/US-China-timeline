@@ -1,3 +1,4 @@
+import html
 import json
 from datetime import date
 from pathlib import Path
@@ -129,6 +130,33 @@ def history_page(events):
         "自 2016 年 11 月 8 日起 · 中英对照"
     )
 
+    st.markdown("""
+    <style>
+    .history-date {
+        font-size: 0.82rem;
+        line-height: 1.1;
+        color: #667085;
+        margin: 0 0 0.12rem 0;
+    }
+    .history-title-zh {
+        font-size: 1.12rem;
+        line-height: 1.2;
+        font-weight: 700;
+        margin: 0 0 0.05rem 0;
+    }
+    .history-title-en {
+        font-size: 0.94rem;
+        line-height: 1.2;
+        color: #475467;
+        margin: 0 0 0.25rem 0;
+    }
+    div[data-testid="stMarkdownContainer"] p {
+        line-height: 1.3 !important;
+        margin-bottom: 0.25rem !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     events = [
     event for event in events
     if event.get("approved") is True
@@ -187,15 +215,28 @@ def history_page(events):
         return
 
     for index, event in enumerate(filtered):
-        event_date = event.get("date", "日期待补")
-        title_zh = event.get("title_zh", "中文标题待补")
-        title_en = event.get("title_en", "English title pending")
+        event_date = str(event.get("date", "日期待补"))
+        date_end = str(event.get("date_end", ""))
+
+        date_label = event_date
+        if date_end and date_end != event_date:
+            date_label += f" — {date_end}"
+
+        title_zh = html.escape(str(event.get("title_zh", "中文标题待补")))
+        title_en = html.escape(str(event.get("title_en", "English title pending")))
+        date_label = html.escape(date_label)
         categories = " · ".join(get_categories(event)) or "未分类 / Unclassified"
 
         with st.container(border=True):
-            st.markdown(f"### {title_zh}（{event_date}）")
-            st.markdown(f"### {title_en}")
-            st.caption(f"领域 / Fields：{categories}")
+            st.markdown(
+                f"""
+                <div class="history-date">{date_label}</div>
+                <div class="history-title-zh">{title_zh}</div>
+                <div class="history-title-en">{title_en}</div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.caption(f"领域 / Fields: {categories}")
 
             render_bilingual_field(event, "summary", "摘要", "Summary")
             render_bilingual_field(event, "participants", "参与官员与会面", "Officials and meetings")
