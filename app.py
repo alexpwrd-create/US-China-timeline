@@ -126,8 +126,9 @@ def history_page(events):
     )
 
     events = [
-        event for event in events
-        if (parse_date(event.get("date")) or date.min) >= HISTORY_START
+    event for event in events
+    if event.get("approved") is True
+    and (parse_date(event.get("date")) or date.min) >= HISTORY_START
     ]
 
     with st.sidebar:
